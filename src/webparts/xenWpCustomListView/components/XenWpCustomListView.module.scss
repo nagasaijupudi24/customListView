@@ -1,0 +1,376 @@
+@import '~@fluentui/react/dist/sass/References.scss';
+
+.xenWpCustomListView {
+  overflow: hidden;
+  padding: 1em;
+  color: "[theme:bodyText, default: #323130]";
+  color: var(--bodyText);
+  &.teams {
+    font-family: $ms-font-family-fallbacks;
+  }
+  .custom_list{
+    min-height: auto;
+    max-height: 57vh;
+    overflow:auto visible !important;
+  
+  }
+  div[class^='ms-DetailsList']{
+    overflow: visible !important;
+  }
+  
+}
+._CustomSearchContoiiner{
+  display: flex;
+  justify-content: flex-end;
+  align-items: center;
+  gap:10px;
+}
+
+.welcome {
+  text-align: center;
+}
+
+.welcomeImage {
+  width: 100%;
+  max-width: 420px;
+}
+
+
+.links {
+  a {
+    text-decoration: none;
+    color: "[theme:link, default:#03787c]";
+    color: var(--link); // note: CSS Custom Properties support is limited to modern browsers only
+
+    &:hover {
+      text-decoration: underline;
+      color: "[theme:linkHovered, default: #014446]";
+      color: var(--linkHovered); // note: CSS Custom Properties support is limited to modern browsers only
+    }
+  }
+  
+}
+
+/* New form */
+
+/* The _CheckBoxcontainer */
+._CheckBoxcontainer {
+  display: block;
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 5px;
+  width:fit-content;
+  // cursor: pointer;
+  font-size: 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
+}
+
+// /* Hide the browser's default checkbox */
+._CheckBoxcontainer input{
+  position: absolute;
+  /* opacity: 0; */
+  z-index: 1;
+  cursor: pointer;
+  height: 13px;
+  min-width: 100px;
+  max-width: 200px !important;
+  // width: 100%;
+  // left: -3 !important;
+  // top: -1 !important;
+  opacity: 0;
+  margin-left: -21px;
+ 
+}
+
+/* Create a custom checkbox */
+.checkmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 12px;
+  width: 12px;
+  background-color:transparent;
+  border:1px solid hsl(0deg 0% 50.2% / 58%);
+  border-radius: 3px;
+}
+
+/* On mouse-over, add a grey background color */
+._CheckBoxcontainer:hover input ~ .checkmark {
+  background-color:transparent;
+}
+
+/* When the checkbox is checked, add a blue background */
+._CheckBoxcontainer input:checked ~ .checkmark {
+    background-color:var(--link);
+  }
+
+/* Create the checkmark/indicator (hidden when not checked) */
+.checkmark:after {
+  content: "";
+  position: absolute;
+  display: none;
+}
+
+/* Show the checkmark when checked */
+._CheckBoxcontainer input:checked ~ .checkmark:after {
+  display: block;
+}
+
+/* Style the checkmark/indicator */
+._CheckBoxcontainer .checkmark:after {
+  left: 4px;
+  top: 0px;
+  width: 3px;
+  height: 8px;
+  border: solid #fff;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg)
+}
+
+.radiocontainer {
+  display: block;
+  width:fit-content;
+  position: relative;
+  padding-left: 18px;
+  margin-bottom: 5px;
+  // cursor: pointer;
+  font-size: 12px;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+}
+
+/* Hide the browser's default radio button */
+.radiocontainer input {
+  position: absolute;
+    z-index: 1;
+    cursor: pointer;
+    height: 15px;
+    // width: 100%;
+    left: -3 !important;
+    top: -1 !important;
+    margin-left: -17px;
+    opacity: 0; 
+    margin-top: -1px;
+    min-width: 100px;
+    max-width: 200px!important;
+}
+
+.radiocontainer input:checked ~ .radiocheckmark {
+  span{
+  
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: var(--link);
+    border: 3px solid white;
+    margin: auto;
+    padding: 4%;
+  }
+  
+}
+
+.radioinsidecircle{
+  display: flex;
+}
+
+.fieldEditor{
+    // padding: 4px 3px; 
+    display: flex;
+    flex-direction: column;
+}
+.radioCheckbox{
+    width: 100%;
+    display: flex;
+    justify-content: space-around;
+    flex-direction: column;
+    /* align-items: center; */
+}
+._Customtextarea{
+    width:100%;
+    border:1px solid #323130;
+    font-size: 12px;
+    font-weight: 400;
+}
+
+/* Create a custom radio button */
+.radiocheckmark {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 14px;
+  width: 14px;
+  background-color:transparent;
+  border-radius: 50%;
+  border: 1px solid hsl(0deg 0% 50.2% / 58%) ;
+}
+
+/* On mouse-over, add a grey background color */
+.radiocontainer:hover input ~ .radiocheckmark {
+  background-color:transparent;
+}
+
+/* When the radio button is checked, add a blue background */
+.radiocontainer input:checked ~ .radiocheckmark {
+  background-color: var(--link);
+}
+
+.radiocontainer input:checked ~ .radiocheckmark {
+  span{
+  
+    width: 8px;
+    height: 8px;
+    border-radius: 100%;
+    background: var(--link);
+    border: 3px solid white;
+    margin: auto;
+    padding: 4%;
+  }
+  
+}
+
+.radioinsidecircle{
+  display: flex;
+}
+
+._customBtnContainer{
+  margin-top: 20px;
+  display: flex;
+  justify-content: flex-end;
+
+  span{
+    margin: 2px;
+  }
+}
+
+._customRequiredlabel{
+  color:red;
+  // margin-left: 2px ;
+  padding-left: 2px;
+}
+._customLabelContainer{
+  display: flex;
+  align-items: center;
+  gap:5px
+}
+._attachementContiner{
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding:5px;
+
+}
+._attchemntContainerLabel{
+  display: flex;
+  // justify-content: space-around;
+  gap:10px;
+  i{
+    cursor: pointer !important;
+  }
+}
+
+
+// ._projectDetailsEachContainer,._projectDetailsEachContainerEdit{
+  
+//   min-height: 1px;
+  
+// }
+
+
+
+
+._spanDescription{
+  font-size: 12px;
+  color: grey;
+}
+
+._spanDanger{
+  font-size: 12px;
+  color: red;
+}
+
+.flexContainer {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 5px;
+}
+
+._projectDetailsEachContainer,._projectDetailsEachContainerEdit{
+    flex: 1 1 calc(33.33% - 10px); /* 3 per row with gap considered */
+  max-width: calc(33.33% - 10px);
+  // min-height: 1px;
+  box-sizing: border-box;
+}
+
+/* 2 per row below 1025px */
+@media (max-width: 1024px) {
+ ._projectDetailsEachContainer,._projectDetailsEachContainerEdit {
+    flex: 1 1 calc(50% - 10px);
+    max-width: calc(50% - 10px);
+  }
+}
+
+/* 1 per row below 500px */
+@media (max-width: 500px) {
+ ._projectDetailsEachContainer,._projectDetailsEachContainerEdit {
+    flex: 1 1 100%;
+    max-width: 100%;
+  }
+}
+
+.marginBottom{
+  margin-bottom: 0px;
+}
+
+.marginTop{
+  margin-top: 0px;
+}
+
+.mainContainer{
+  padding:5px 20px 20px 20px;
+ 
+
+}
+
+.richTextFieldWrapper {
+ 
+
+  
+  &:not(:focus-within) :global(.ql-toolbar) {
+    opacity: 0;
+    pointer-events: none;
+  }
+
+  &:focus-within :global(.ql-toolbar) {
+    opacity: 1;
+    pointer-events: auto;
+  }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

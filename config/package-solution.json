@@ -1,0 +1,40 @@
+{
+  "$schema": "https://developer.microsoft.com/json-schemas/spfx-build/package-solution.schema.json",
+  "solution": {
+    "name": "xenwp-customlistview-client-side-solution",
+    "id": "1b578abb-7f04-40a1-aa29-807204b6ee86",
+    "version": "1.0.0.4",
+    "includeClientSideAssets": true,
+    "skipFeatureDeployment": true,
+    "isDomainIsolated": false,
+    "developer": {
+      "name": "",
+      "websiteUrl": "",
+      "privacyUrl": "",
+      "termsOfUseUrl": "",
+      "mpnId": "Undefined-1.20.0"
+    },
+    "metadata": {
+      "shortDescription": {
+        "default": "Custom List View description"
+      },
+      "longDescription": {
+        "default": "Custom List View description"
+      },
+      "screenshotPaths": [],
+      "videoUrl": "",
+      "categories": []
+    },
+    "features": [
+      {
+        "title": "Custom List View Feature",
+        "description": "The feature that activates elements of the Custom List View solution.",
+        "id": "328de1d3-7a26-4713-a883-651e1b5f6967",
+        "version": "1.0.0.4"
+      }
+    ]
+  },
+  "paths": {
+    "zippedPackage": "solution/xenwp-customlistview.sppkg"
+  }
+}
