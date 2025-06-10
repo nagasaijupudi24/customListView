@@ -165,16 +165,20 @@ const otherDetailColumn = [
 
 
   const datePickerFontSize = {
-    root: {
+  textField: {
+    fieldGroup: {
       fontSize: 13,
+      height: 32,
     },
-    textField: {
+    field: {
       fontSize: 13,
+      height: 32,
     },
-    callout: {
-      fontSize: 13,
-    },
-  }
+  },
+  callout: {
+    fontSize: 13,
+  },
+};
 
 
 export default class XenWpCreateForm extends React.Component<IXenCreateFormProps, IxenCreateFormState> {
@@ -228,7 +232,7 @@ export default class XenWpCreateForm extends React.Component<IXenCreateFormProps
                 return match ? { ...match } : null;
             })
             .filter((item: any) => item !== null);
-        console.log(merged,"merged")
+        // console.log(merged,"merged")
 
         return merged; 
     }
@@ -286,7 +290,7 @@ export default class XenWpCreateForm extends React.Component<IXenCreateFormProps
 
     private _getPeoplePickerItemsSingleUser = (nm: string, items: any[]) => {
 
-        console.log(nm, items)
+        // console.log(nm, items)
         if (items.length > 0) {
             this.setState(prevState => ({ Data: { ...prevState.Data, [nm]: items[0]?.id } }));
         } else {
@@ -417,7 +421,7 @@ export default class XenWpCreateForm extends React.Component<IXenCreateFormProps
                         });
                     }
                     this.setState({ attachments: [...this.state.attachments, ...fileInfo] });
-                    console.log(fileInfo, this.state.attachments)
+                    // console.log(fileInfo, this.state.attachments)
                     // this.fileInfos.push(fileInfo);
                 };
             })(file);
@@ -524,7 +528,7 @@ export default class XenWpCreateForm extends React.Component<IXenCreateFormProps
 
                              {/* <br/>
                             <span style={{color:'green',fontStyle:'oblique'}}><strong>1</strong></span> */}
-                              {_x.text === 'Project Name' &&<span className={`${styles._spanDanger}`}>You Can't leave this blank</span>}
+                             
                              {/* {_x.text === 'Project Name' &&<br/>} */}
                              {_x.text === 'Project Name' &&<span className={`${styles._spanDescription}`}>Kindly use following template:</span>}
                             {/* {_x.text === 'Project Name' &&<br/>} */}

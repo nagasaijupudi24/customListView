@@ -289,6 +289,11 @@
   color: grey;
 }
 
+._spanThemeColor {
+  color: "[theme: themePrimary]";
+  font-size: 11px;
+}
+
 ._spanDanger{
   font-size: 12px;
   color: red;
@@ -352,6 +357,20 @@
   }
 }
 
+
+._viewEntriesContainer{
+ 
+  max-height: 150px;
+   overflow-y: auto;
+
+
+}
+
+._spanDescriptionEntries{
+  font-size: 11px;
+
+  color: grey;
+}
 
 
 

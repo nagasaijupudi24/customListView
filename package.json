@@ -23,6 +23,7 @@
     "@pnp/spfx-controls-react": "3.20.0",
     "@pnp/spfx-property-controls": "3.19.0",
     "bootstrap": "^5.3.6",
+    "date-fns": "^4.1.0",
     "draft-js": "^0.11.7",
     "draftjs-to-html": "^0.9.1",
     "office-ui-fabric-core": "^11.1.0",

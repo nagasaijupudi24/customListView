@@ -42,6 +42,7 @@ interface IXenWpCustomListViewState {
   hideEditForm: boolean;
   selectionDetails: any;
   selectedcount: number;
+  versionEnteries:any;
 
 }
 
@@ -68,7 +69,8 @@ export default class XenWpCustomListView extends React.Component<IXenWpCustomLis
       hideCreateForm: false,
       selectionDetails: [],
       selectedcount: 0,
-      hideEditForm: false
+      hideEditForm: false,
+      versionEnteries:[]
 
     };
     const siteInfo = this.props.site || [];
@@ -76,7 +78,7 @@ export default class XenWpCustomListView extends React.Component<IXenWpCustomLis
     this._spService = new spService(this.props.context, siteInfo[0]?.url);
     this._sp = spfi(siteInfo[0]?.url).using(SPFx(this.props.context));
     console.log(this._selection)
-    console.log(this.props)
+    // console.log(this.props)
     // Initialize the component by fetching user data and items
     this._initializeComponent();
   }
@@ -308,23 +310,31 @@ export default class XenWpCustomListView extends React.Component<IXenWpCustomLis
   }
 
 
-  private onSearch = (text: string): void => {
+ private onSearch = (text: string): void => {
+  const searchFields = this.state.rawdata.length > 0
+    ? Object.keys(this.state.rawdata[0])
+    : [];
 
-    this.setState({
-      allItems: text ? this.state.rawdata.filter((item: any) => Object.values(item as Record<string, any>).some(value =>
-        (value || '').toString().toLowerCase().indexOf(text.toLowerCase()) > -1
-      ))
+  this.setState({
+    allItems: text
+      ? this.state.rawdata.filter((item: any) =>
+          searchFields.some(field =>
+            (item[field] || '')
+              .toString()
+              .toLowerCase()
+              .includes(text.toLowerCase())
+          )
+        )
+      : this.state.rawdata,
+  });
+  console.log(searchFields)
+};
 
-        : this.state.rawdata,
-    });
-    // }
-  }
 
-  private onClear = () => {
-    this.setState({
-      allItems: this.state.rawdata
-    })
-  }
+private onClear = (): void => {
+  this.setState({ allItems: this.state.rawdata });
+};
+
 
   private _onDismissCreateFormDialog = () => {
     this.setState({ hideCreateForm: !this.state.hideCreateForm })
@@ -341,8 +351,18 @@ export default class XenWpCustomListView extends React.Component<IXenWpCustomLis
     const userfields = fileterUserFileds.map((_x: { Title: any; }) => _x.Title);
     const updatedArray = userfields.map((item: any) => `${item}/EMail`);
     const selectFileds = updatedArray.join(",");
-    const expandfields = userfields.join(",");
+    const expandfields = [...userfields].join(",");
     const currentObj = await this._spService.getItemById(this.props.list, Number(item[0].ID), selectFileds, expandfields);
+
+
+    // console.log(currentObj)
+
+    const itemVersions = await this._sp.web.lists.getByTitle(this.props.list).items.getById(Number(item[0].ID)).versions.select("VersionLabel", "Created", "Editor/Title", "Description")
+  .expand("Editor")();
+    // console.log(itemVersions)
+
+    this.setState({versionEnteries:itemVersions})
+
     const contentObj = currentObj?.items;
     const filecotent = currentObj?.files;
     fileterUserFileds.map((_x: any) => {
@@ -388,10 +408,17 @@ export default class XenWpCustomListView extends React.Component<IXenWpCustomLis
     return (
       <section className={`${styles.xenWpCustomListView} ${hasTeamsContext ? styles.teams : ''}`}>
         <CommandBar items={_items} />
-        {this.props.isSearchEnable && (<div className={styles._CustomSearchContoiiner}>
-          <span>Search </span>
-          <SearchBox onSearch={this.onSearch} onClear={this.onClear} title='Search' />
-        </div>)}
+        {this.props.isSearchEnable && (
+  <div className={styles._CustomSearchContoiiner}>
+    <span>Search </span>
+    <SearchBox 
+      onChange={(_, newValue) => this.onSearch(newValue || '')} 
+      onClear={this.onClear} 
+      title='Search' 
+    />
+  </div>
+)}
+
         <div className={styles.custom_list}>
           {isLoading ? (
             <Spinner size={SpinnerSize.large} label="Loading items..." />
@@ -457,6 +484,7 @@ export default class XenWpCustomListView extends React.Component<IXenWpCustomLis
             context={this.props.context}
             siteUrl={this._siteUrl}
             onCloseCreateForm={this._onDismissEditFormDialog}
+            versionEntries={this.state.versionEnteries}
           />
 
         </Modal>

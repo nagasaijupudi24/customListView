@@ -14,7 +14,7 @@ import { ComboBox, DatePicker, DefaultButton, Dialog, DialogFooter, Dropdown, Ic
 import { IPeoplePickerContext, PeoplePicker, PrincipalType } from "@pnp/spfx-controls-react/lib/PeoplePicker";
 // import basicDetails from './ColumnDetails.js'
 // import { TextField } from '@fluentui/react';
-
+import { format } from 'date-fns';
 interface IXenCreateFormProps {
     columnsDetails?: any;
     listName: any;
@@ -22,6 +22,7 @@ interface IXenCreateFormProps {
     context: WebPartContext;
     onCloseCreateForm: any;
     data: any;
+    versionEntries:any
 }
 
 
@@ -94,16 +95,20 @@ const textFieldFontSize = {
 
 
   const datePickerFontSize = {
-    root: {
+  textField: {
+    fieldGroup: {
       fontSize: 13,
+      height: 32,
     },
-    textField: {
+    field: {
       fontSize: 13,
+      height: 32,
     },
-    callout: {
-      fontSize: 13,
-    },
-  }
+  },
+  callout: {
+    fontSize: 13,
+  },
+};
 
 const basicDetails = [
     { title: "Title" },
@@ -165,8 +170,11 @@ export default class XenWpEditForm extends React.Component<IXenCreateFormProps, 
     private _peoplePickerContext: IPeoplePickerContext;
     private _fileRef: any;
     protected presaleSPOC: any;
+    
     constructor(props: IXenCreateFormProps) {
         super(props);
+        // console.log(this.props)
+        // console.log(this.props.data)
         this.state = {
             Data: this.props.data,
             updatedItem: {},
@@ -506,6 +514,19 @@ export default class XenWpEditForm extends React.Component<IXenCreateFormProps, 
     }
     private _OnChangeComboBox = (event: React.FormEvent<any>, option?: any, index?: number, value?: string) => {
         this.setState(prevState => ({ Data: { ...prevState.Data, [`CustomerNameId`]: option?.key } }));
+
+
+
+    }
+
+    private _renderViewEntries = (entires:any)=>{
+        return <div className={styles._viewEntriesContainer}>
+            {entires.map((_eachEntry:any)=>{
+                return <span className={styles._spanDescriptionEntries}>
+                    <span>{_eachEntry.Editor.LookupValue}</span> <span className={styles._spanThemeColor}>{`(${format(new Date(_eachEntry.Created), "dd/MM/yyyy hh:mm a")})`}</span> : <span>{_eachEntry.Description}</span><br/>
+                </span>
+            })}
+        </div>
     }
 
     private _configureColumnRender = (columnInfo: any) => {
@@ -531,7 +552,7 @@ export default class XenWpEditForm extends React.Component<IXenCreateFormProps, 
 
                              {/* <br/>
                             <span style={{color:'green',fontStyle:'oblique'}}><strong>1</strong></span> */}
-                              {_x.text === 'Project Name' &&<span className={`${styles._spanDanger}`}>You Can't leave this blank</span>}
+                             
                              {/* {_x.text === 'Project Name' &&<br/>} */}
                              {_x.text === 'Project Name' &&<span className={`${styles._spanDescription}`}>Kindly use following template:</span>}
                             {/* {_x.text === 'Project Name' &&<br/>} */}
@@ -884,7 +905,8 @@ placeholder={`Enter ${_x.text}`}
 
                             {/* <span style={{color:'green',fontStyle:'oblique'}}><strong>12</strong></span> */}
                              {/* <br/> */}
-                         {_x.text === 'Description' &&<span className={`${styles._spanDescription}`}>Any description related to the project</span>}
+                         {_x.text === 'Description' &&<span className={`${styles._spanDescription}`}>Any description related to the project</span>} 
+                         {_x.text === 'Description' && this._renderViewEntries(this.props.versionEntries)}
 
 
                         </div>

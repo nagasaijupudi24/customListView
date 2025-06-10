@@ -81,6 +81,7 @@ export default class XenWpCustomListViewWebPart extends BaseClientSideWebPart<IX
     this._sp=spfi(customSiteUrl[0]?.url ||"https://xencia1.sharepoint.com/sites/XenciaSalesTracker/").using(SPFx(this.context));
    
     const lists = await this._sp.web.lists.filter(`BaseTemplate eq ${100}`)();
+    console.log(lists)
     if(lists){
       lists.map((_x: any)=>{
         this._listDrpDwnOptions.push({key:_x.Title,text:_x.Title});

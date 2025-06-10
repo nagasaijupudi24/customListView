@@ -3,7 +3,7 @@
   "solution": {
     "name": "xenwp-customlistview-client-side-solution",
     "id": "1b578abb-7f04-40a1-aa29-807204b6ee86",
-    "version": "1.0.0.4",
+    "version": "1.0.0.6",
     "includeClientSideAssets": true,
     "skipFeatureDeployment": true,
     "isDomainIsolated": false,
@@ -30,7 +30,7 @@
         "title": "Custom List View Feature",
         "description": "The feature that activates elements of the Custom List View solution.",
         "id": "328de1d3-7a26-4713-a883-651e1b5f6967",
-        "version": "1.0.0.4"
+        "version": "1.0.0.6"
       }
     ]
   },
